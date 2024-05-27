@@ -1,5 +1,7 @@
 package api
 
+import "fmt"
+
 type Response struct {
 	Timestamp             string  `json:"timestamp"`
 	Low                   string  `json:"low"`
@@ -12,4 +14,13 @@ type Response struct {
 	PriceChange           string  `json:"priceChange"`
 	PriceChangePercentage string  `json:"priceChangePercentage"`
 	Pair                  string  `json:"pair"`
+}
+
+func PrintRate(code string) {
+	rate, err := GetRate(code)
+	if err == nil {
+		fmt.Printf("Rate for %s is %.2f USD\n", rate.Currency, rate.Price)
+	} else {
+		fmt.Println(err)
+	}
 }
